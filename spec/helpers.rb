@@ -1,6 +1,6 @@
 # Mock Rails.application.eager_load! and define some
 # Rails models for use in specs.
-class Rails
+module Rails
   def self.application
     self
   end
@@ -49,6 +49,7 @@ module Helpers
       end
 
       create_table 'another_samples', :force => true do |t|
+        t.bigint   'sample_id'
         t.string   'string'
         t.text     'text'
         t.integer  'integer'
@@ -79,6 +80,8 @@ module Helpers
       end
 
       create_table 'empty_models', force: true
+
+      add_foreign_key "another_samples", "samples"
     end
   end
 

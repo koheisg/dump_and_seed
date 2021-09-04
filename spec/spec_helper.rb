@@ -12,7 +12,7 @@ require 'factory_bot'
 
 require './spec/helpers'
 
-ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => ':memory:')
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
 
 FactoryBot.find_definitions
 
@@ -32,5 +32,7 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+    FileUtils.rm('tmp/db/seeds.rb')
+    FileUtils.rm_r('tmp/db/seeds')
   end
 end

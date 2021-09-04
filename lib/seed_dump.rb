@@ -1,11 +1,14 @@
 require 'ipaddr'
-require 'seed_dump/dump_methods/enumeration'
-require 'seed_dump/dump_methods'
-require 'seed_dump/environment'
+require 'seed_dump/dump'
+require 'seed_dump/seed_rb'
+require 'seed_dump/seed_table'
+require 'seed_dump/record'
+require 'seed_dump/configuration'
 
-class SeedDump
-  extend Environment
-  extend DumpMethods
-
+module SeedDump
   require 'seed_dump/railtie' if defined?(Rails)
+
+  def self.configure
+    yield(SeedDump::Configuration)
+  end
 end
